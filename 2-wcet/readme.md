@@ -5,7 +5,7 @@ WCET $T$ of some code $P$ with input $x$ in environment $w$ is:
 
 
 $$
-T = max_{x,w} \left( f_{P(x,w)} \right)
+T = max_{x,w} \left\lbrace f_{P(x,w)} \right\rbrace
 $$
 
 
