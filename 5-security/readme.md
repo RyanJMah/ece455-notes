@@ -160,19 +160,21 @@ Two main categories:
        * Determine $x$
        * Example: for $93 = 17^x \text{ mod } 100$ solve for $x$
        * Can use **square and multiply** algorithm if we know $x$ to calculate $g^x \text{ mod } m$
-       * ```C
-         // Square and multiply...
-         r = 1;
-         for ( i = (num_exponent_bits - 1); i >= 0; i-- )
-         {
-             r = (r**2) % m;
-         
-             if ( (x >> i) & 1 )
-             {
-                 r = (r * x) % m;
-             }
-         }
-         ```
+
+```C
+// Square and multiply...
+r = 1;
+
+for ( i = (num_exponent_bits - 1); i >= 0; i-- )
+{
+    r = (r**2) % m;
+ 
+    if ( (x >> i) & 1 )
+    {
+        r = (r * x) % m;
+    }
+}
+```
 
 <br>
 
