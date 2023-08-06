@@ -254,6 +254,8 @@ Three roles:
 3. Learners
    * If all agents are acceptors, there is no need for learners
 
+<br>
+
 ![](./images/paxos.png)
 
 Two phases, each with two parts:
