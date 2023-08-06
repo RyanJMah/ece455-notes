@@ -160,8 +160,18 @@ Two main categories:
        * Determine $x$
        * Example: for $93 = 17^x \text{ mod } 100$ solve for $x$
        * Can use **square and multiply** algorithm if we know $x$ to calculate $g^x \text{ mod } m$
-       * ```
-         asdf
+       * ```C
+         // Square and multiply...
+         r = 1;
+         for ( i = (num_exponent_bits - 1); i >= 0; i-- )
+         {
+             r = (r**2) % m;
+         
+             if ( (x >> i) & 1 )
+             {
+                 r = (r * x) % m;
+             }
+         }
          ```
 
 <br>
@@ -241,10 +251,45 @@ How to obtain a power trace?
 
 ![](./images/power_analysis.PNG)
 
-Power consumption of CPU directly reveals information.
+### Simple Power Analysis
 
 * Perhaps the power trace is:
   * Higher amplitude for a 1 than a 0
   * Longer periods of high voltage for a 1 than a 0
 
+Recall square and multiply:
+
+* When exponent bit is 0, there is a squaring operation
+* When exponent bit is 1, there is a squaring followed by a multiplication (more power)
+
 ![](./images/scope_trace.PNG)
+
+**Solution:**
+
+* Don't have data conditional on execution
+
+  * Do same computation in all cases, just with different inputs
+  * Big performance penalty
+
+* e.g., for square and multiply, always do the multiplication
+
+* ```C
+  r = 1;
+  for ( i = (num_exponent_bits - 1); i >= 0; i-- )
+  {
+      temp[0] = (r**2) % m;
+      temp[1] = (temp[0] * x) % m;
+  
+      r = temp[ (x >> i) & 1 ];
+  }
+  ```
+
+  
+
+### Differential Power Analysis
+
+Can attack, even if we do "square and ALWAYS multiply"...
+
+Exploit tiny differences related to the actual bits of the data. Use signal-processing and statistics to determine the secret key.
+
+This is actually very complicated, I doubt he will ask this on the final (copium?).
