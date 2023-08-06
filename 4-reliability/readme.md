@@ -277,11 +277,90 @@ Two phases, each with two parts:
     * If $n$ is higher than every previous proposal received by the acceptor
       * Send a **`Promise(n, v)`** back
         * A promise that this acceptor will ignore all future proposals with lower $n$
-        * Inform the proposer of any value $v$ it previously accepted with lower $n$ in phase 2b
+        * Inform the proposer of any value $v$ it previously accepted with lower $n$ in phase 2b (if no previous value, say `v = NULL` maybe...)
 
     * If the acceptor has already promised to not accept $n$
       * Don't have to do anything
 
 <br>
 
-**Phase 2** - "The Commit Stage"
+**Phase 2** - "The Accept Stage"
+
+* Phase 2a - **Accept**
+  * If the proposer receives a quorum of `Promise(n, v)` messages
+    * If any of the acceptors indicated a previous value $v$
+      * Proposer must choose the $v$ with the highest $n$ reported by the acceptors
+        * *(Essentially, they have to go along with the previously agreed upon consensus)*
+    * Otherwise, proposer is free to choose its own value $v$
+      * *(It is free to propose its own value if there is no prior consensus)*
+  * The proposer sends an **`Accept(n, v)`** to a quorum of acceptors
+    * This is a "please accept this proposal"
+
+* Phase 2b - **Accepted**
+  * If an acceptor receives an `Accept(n, v)`
+    * If it has *promised to not accept* that $n$
+      * Do nothing
+    * If it has ***not** promised to not accept* that $n$
+      * It registers $v$ as the accepted value for this paxos
+      * Send an **`Accepted(n, v)`** message to all agents
+        * The **learner** agents also receive this message, informing them of the most up-to-date consensus
+
+### Leader Elections
+
+Who gets to propose?
+
+* Bad if everyone is proposing new stuff all the time
+* Lots of failed proposed
+* Lots of rejected accepts
+
+Vote for a leader!
+
+* Only the leader gets to propose
+* If the leader is unreachable for a while, propose yourself as the new leader
+  * Do Paxos to agree on a leader
+
+### Byzantine Faults
+
+"How do two Generals agree to attack a city together at the same time if they cannot guarantee their messengers will get through?" - They can't.
+
+What if there's more generals, and they can **lie**?
+
+* **Byzantine Faults** are faults where the failed subcomponent present as failed or not failed differently to different observers
+  * Often, this is because the failed subsystem is *malicious*
+
+Normal Paxos cannot handle Byzantine faults.
+
+* There is a variant called **Byzantine Paxos** that can though
+  * Out of scope for this class
+
+## Nakamoto Consensus
+
+Can handle Byzantine faults for $f$ failures in $2f + 1$ **byzantine agents.**
+
+Also known as *proof of work*.
+
+* For an agent to propose a new value, they must first solve a puzzle based on the last value
+  * Traditionally, this is a cryptographic challenge
+
+<br>
+
+Let $v$ be the last value the proposer trusts.
+
+* Consider some hash function $y = h(x)$ that transforms input $x$ into a fixed-length bit sequence $y$
+  * This function is computationally infeasible to reverse
+  * Small changes in $x$ lead to large changes in $y$
+
+* Solving the puzzle is finding some nonce $n$ such that $h(v, n) = y$ where $y$ has some number of leading zeros
+  * Computationally easy for a node to verify $h(v,n) = y$
+
+Once an agent finds $n$ to solve the puzzle for $v_n$, they can suggest value $v_{n+1}$ for the next consensus
+
+* All honest nodes now try to solve $v_{n+1}$
+
+<br>
+
+A dishonest agent may find some $n$ and propose a new, bad value for $v_{n+1}$
+
+* Honest agents will see the bad value, and continue to try and find a solution for $v_n$
+* So long as there are more honest agents than dishonest agents, the longest chain will remain honest
+  * $f$ failures in $2f + 1$ byzantine agents
