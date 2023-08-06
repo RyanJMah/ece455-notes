@@ -82,7 +82,7 @@ To implement EDF, a priority queue is reasonable. Need to make sure that soft re
 **UB Test for EDF:**
 
 $$
-U = \sum_{k=1}^{N}{\frac{C_k}{\text{min}(D_k, \tau_k)}} \le 1
+U = \sum_{k=1}^{N}{\frac{C_k}{\text{min}(D_k, P_k)}} \le 1
 $$
 
 where $D_k$ is the deadline for task $k$, and $\tau_k$ is the period of task $k$.
@@ -150,7 +150,7 @@ Divide offline schedule into **frames**
 * Fixed length interval where running jobs are fixed
 * Should evenly divide the hyperperiod of the periodic tasks
 
-**Algorithm**
+### Cyclic Executive Runtime Algorithm
 
 Let $t$ be the current global frame number, and $F$ be the number of frames in a hyperperiod
 
@@ -170,3 +170,33 @@ Timer interrupt at interfaces of frame time $f$
   * Set a timer, run sporadic/aperiodic task
     * If the task finishes, remove from queue
     * If timer expires, preempt, requeue, and run next periodic task
+
+### Frame Time Conditions
+
+* Frames should be sufficiently long so that no job needs to be preempted
+  * $f \ge max\lbrace e_i \rbrace$
+
+* Frame size should evenly divide hyperperiod
+
+* Frame should be sufficiently small so that between the release time and deadline for each task, there is at least one frame
+  * $2f - gcd\lbrace P_i, f \rbrace \le D_i$
+  * For simply periodic tasks:
+    * $2f - gcd\lbrace P_i, f \rbrace \le P_i$
+
+### Slack Stealing
+
+Move slack to the beginning of frame
+
+* Thus, runs the sporadic/aperiodic tasks first
+  * Improves response time
+
+"Free" with a good offline schedule, more vulnerable to bad WCET estimates
+
+### Sporadic Acceptance
+
+Separate queue for sporadic tasks.
+
+We know minimum inter-arrival time:
+
+* Can check if it will fit in next frame's slack time or not
+* Only schedule if it will fit
