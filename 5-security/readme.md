@@ -150,6 +150,7 @@ Everyone shares their public keys around.
 Two main categories:
 
 1. **Diffie-Hellman** Based
+   
    * Actually a secret exchange algorithm, but formed the basis for many public key algorithms
    * Relies on the difficulty of the **discrete logarithm problem**
      * Given:
@@ -159,6 +160,9 @@ Two main categories:
        * Determine $x$
        * Example: for $93 = 17^x \text{ mod } 100$ solve for $x$
        * Can use **square and multiply** algorithm if we know $x$ to calculate $g^x \text{ mod } m$
+       * ```
+         asdf
+         ```
 
 <br>
 
@@ -191,3 +195,56 @@ The string we sign could be *someone else's public key*.
 # Side-Channel Analysis
 
 Can bypass the "mathematical" security entirely if the attacker physically has the hardware (device).
+
+* Observe the "byproducts" of computation
+  * e.g., power consumption, time delays, sound, heat, etc.
+
+## Timing Attacks
+
+Consider the following (bad) password validation:
+
+```C
+bool is_password_ok(char* username, char* password)
+{
+    char* actual_password = get_password_from_db(username);
+
+    return strcmp(actual_password, password);
+}
+```
+
+The execution time of the password validation depends on how long the password is!
+
+* `strcmp()` is $O(n)$
+
+Can exploit this with unlimited login attempts.
+
+* Start with a 1-character password
+  * Brute force all possible 1-character passwords, the correct character means `strcmp` will take slightly longer
+  * Let's say the correct character is `a`
+* Now repeat for 2-character passwords
+  * `aa`, `ab`, `ac`, etc.
+* Continue until you have the whole password
+
+How to fix:
+
+* Length checks don't work, just send a password of each length until it takes longer
+* **Solution:**
+  * Hash passwords first, compare fixed length of hash
+
+## Power Side-Channel Analysis
+
+Look at the power consumption of the device while its doing certain operations.
+
+How to obtain a power trace?
+
+* Shunt resistor current sensor
+
+![](./images/power_analysis.PNG)
+
+Power consumption of CPU directly reveals information.
+
+* Perhaps the power trace is:
+  * Higher amplitude for a 1 than a 0
+  * Longer periods of high voltage for a 1 than a 0
+
+![](./images/scope_trace.PNG)
