@@ -155,7 +155,7 @@ Two main categories.
      * Given:
        * Base $g$
        * Modulus $m$
-       * $y$ where $y = g^x \; \text{mod} \; m$
+       * $y$ where $y = g^x \text{ mod } m$
 
 <br>
 
