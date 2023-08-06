@@ -164,7 +164,6 @@ Two main categories:
 <br>
 
 Rivest-Shamir-Adleman (**RSA**) Based
-
 * Relies on the difficulty of factoring extremely large integers
 
 <br>
