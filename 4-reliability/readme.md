@@ -263,14 +263,27 @@ Two phases, each with two parts:
 **Phase 1** - "The Promise Stage"
 
 * Phase 1a - **Prepare**
-  * **Proposer** creates a **prepare** message with number $n$, `Prepare(n)`
+  * **Proposer** creates a **prepare** message with number $n$, **`Prepare(n)`**
   * $n$ must be greater than any number used in a previous prepare message from this agent
   * Proposer sends the `Prepare(n)` message to at least a quorum (majority) of agents
     * Proposer shouldn't initiate paxos if it can't communicate with at least a quorum of agents
 
+<br>
+
 * Phase 1b - **Promise**
-  * asdf
 
+  * Each **acceptor** awaits a `Prepare(n)`
 
+  * Look at $n$
+
+    * If $n$ is higher than every previous proposal received by the acceptor
+      * Send a **`Promise(n, v)`** back
+        * A promise that this acceptor will ignore all future proposals with lower $n$
+        * Inform the proposer of any value $v$ it previously accepted with lower $n$ in phase 2b
+
+    * If the acceptor has already promised to not accept $n$
+      * Don't have to do anything
+
+<br>
 
 **Phase 2** - "The Commit Stage"
