@@ -232,20 +232,34 @@ Properties of consensus:
 
 ### Paxos Consensus Algorithm
 
-https://www.youtube.com/watch?v=s8JqcZtvnsM&t=138s
+https://www.youtube.com/watch?v=d7nAGI_NZPk
 
 Voting based algorithm
 
-* Majority rules - can tolerate $f$ failures in a system of $2f + 1$ fail-stop agents
+* Majority rules
+  * Consensus means that a majority of agents agree
+
+* Can tolerate $f$ failures in a system of $2f + 1$ fail-stop agents
   * Example: 3 failures in a system of $(2\cdot3 + 1)=7$ can be tolerated, still have 4 in agreement
 
 * $f + 1$ is a **quorum** in a system of $2f + 1$ agents
   * Example: in a system of 7 agents, 4 need to agree in order for system to proceed (need a quorum to proceed)
 
+<br>
+
+Three roles:
+
+1. Proposer
+2. Acceptor
+3. Learners
+   * If all agents are acceptors, there is no need for learners
+
+<br>
+
 Two phases, each with two parts:
 
 * **Phase 1** - "The Promise Stage"
   * Part (a)
-    * 
+    * Agent 
 
 * **Phase 2** - "The Commit Stage"
