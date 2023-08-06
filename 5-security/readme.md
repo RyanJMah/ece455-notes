@@ -46,7 +46,7 @@ Can write out of bounds of buffer to overwrite LR on stack, can make program jum
 
 Another variant of the attack is to write code to the buffer, then make the program jump to your malicious code.
 
-## Cryptography
+# Cryptography
 
 **Very** high level overview.
 
@@ -73,7 +73,7 @@ Principles:
   * Also called **public key cryptography**
     * (Apparently, not formally, but in practice yes? This is what prof said.)
 
-### Symmetric Key Cryptography
+## Symmetric Key Cryptography
 
 Sender an recipient have some pre-shared secret key $K$.
 
@@ -111,7 +111,7 @@ In practice, just use a modern symmetric key algorithm like **AES** (Advanced En
 
 * Many modern MCUs have AES accelerators
 
-#### Problems with Symmetric Key
+### Problems with Symmetric Key
 
 Have to share the key!
 
@@ -121,7 +121,7 @@ Somehow pre-arrange the transfer:
 * Better keep the key *very* safe though...
   * Maybe in a **Hardware Security Module** (HSM)
 
-### Public Key Cryptography
+## Public Key Cryptography
 
 Use two different keys instead.
 
@@ -177,7 +177,7 @@ Rivest-Shamir-Adleman (**RSA**) Based
 
 <br>
 
-#### Digital Signatures
+### Digital Signatures
 
 Sign some string with your private key
 
