@@ -1,5 +1,15 @@
 # ECE 455 - Realtime Scheduling
 
+## Criticality
+
+* **Soft** Criticality
+   * Missing the deadline *may* occur with some very low probability
+   * Example: keyboard, mouse
+ 
+* **Hard** Criticality
+   * Missing the deadline *must* not occur
+   * Example: airbag, flight control
+
 ## Tasks and Jobs
 
 A **task** is a distinct unit of work the system must do (a thread, in an RTOS setting).
