@@ -232,7 +232,7 @@ Properties of consensus:
 
 ### Paxos Consensus Algorithm
 
-https://www.youtube.com/watch?v=d7nAGI_NZPk
+https://youtu.be/s8JqcZtvnsM?si=U7NvPO430mHAqMpY
 
 Voting based algorithm
 
@@ -254,12 +254,16 @@ Three roles:
 3. Learners
    * If all agents are acceptors, there is no need for learners
 
-<br>
+![](./images/paxos.png)
 
 Two phases, each with two parts:
 
-* **Phase 1** - "The Promise Stage"
-  * Part (a)
-    * Agent 
+**Phase 1** - "The Promise Stage"
 
-* **Phase 2** - "The Commit Stage"
+* Phase 1a - **Prepare**
+  * **Proposer** creates a **prepare** message with number $n$, `Prepare(n)`
+  * $n$ must be greater than any number used in a previous prepare message from this agent
+  * Proposer sends the `Prepare(n)` message to at least a quorum (majority) of agents
+    * Proposer shouldn't initiate paxos if it can't communicate with at least a quorum of agents
+
+**Phase 2** - "The Commit Stage"
