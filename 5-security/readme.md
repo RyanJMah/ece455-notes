@@ -150,7 +150,6 @@ Everyone shares their public keys around.
 Two main categories:
 
 1. **Diffie-Hellman** Based
-
    * Actually a secret exchange algorithm, but formed the basis for many public key algorithms
    * Relies on the difficulty of the **discrete logarithm problem**
      * Given:
@@ -163,8 +162,8 @@ Two main categories:
 
 <br>
 
-Rivest-Shamir-Adleman (**RSA**) Based
-* Relies on the difficulty of factoring extremely large integers
+2. Rivest-Shamir-Adleman (**RSA**) Based
+	* Relies on the difficulty of factoring extremely large integers
 
 <br>
 
