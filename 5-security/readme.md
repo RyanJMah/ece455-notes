@@ -180,3 +180,14 @@ Sign some string with your private key
   * The signature is only valid for that string
   * If the string is tampered with, the signature won't match
 
+### Public Key Infrastructure
+
+The string we sign could be *someone else's public key*.
+
+* By signing their key I am vouching for them
+* We can chain keys together this way to get a web of trust
+* Give signatures a time limit, and revoke trust as necessary
+
+# Side-Channel Analysis
+
+Can bypass the "mathematical" security entirely if the attacker physically has the hardware (device).
