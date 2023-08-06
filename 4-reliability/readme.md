@@ -268,8 +268,6 @@ Two phases, each with two parts:
   * Proposer sends the `Prepare(n)` message to at least a quorum (majority) of agents
     * Proposer shouldn't initiate paxos if it can't communicate with at least a quorum of agents
 
-<br>
-
 * Phase 1b - **Promise**
 
   * Each **acceptor** awaits a `Prepare(n)`
