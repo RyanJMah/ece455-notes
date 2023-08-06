@@ -152,21 +152,13 @@ Two main categories:
 1. **Diffie-Hellman** Based
 
    * Actually a secret exchange algorithm, but formed the basis for many public key algorithms
-
    * Relies on the difficulty of the **discrete logarithm problem**
-
      * Given:
-
        * Base $g$
-
        * Modulus $m$
-
        * $y$ where $y = g^x \text{ mod } m$
-
        * Determine $x$
-
        * Example: for $93 = 17^x \text{ mod } 100$ solve for $x$
-
        * Can use **square and multiply** algorithm if we know $x$ to calculate $g^x \text{ mod } m$
 
 <br>
