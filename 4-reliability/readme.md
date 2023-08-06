@@ -188,7 +188,7 @@ Blocks must reach "consensus" about system state.
 
 All processes make a checkpoint before starting a conversation.
 
-![](./images/conversations.PNG)
+![](./images/conversations.png)
 
 All processes must pass their acceptance test before advancing.
 
