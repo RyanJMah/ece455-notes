@@ -234,7 +234,7 @@ Properties of consensus:
 
 https://youtu.be/s8JqcZtvnsM?si=U7NvPO430mHAqMpY
 
-Voting based consensus algorithm
+Voting based consensus algorithm.
 
 * Majority rules
   * Consensus means that a majority of agents agree
@@ -267,5 +267,10 @@ Two phases, each with two parts:
   * $n$ must be greater than any number used in a previous prepare message from this agent
   * Proposer sends the `Prepare(n)` message to at least a quorum (majority) of agents
     * Proposer shouldn't initiate paxos if it can't communicate with at least a quorum of agents
+
+* Phase 1b - **Promise**
+  * asdf
+
+
 
 **Phase 2** - "The Commit Stage"
