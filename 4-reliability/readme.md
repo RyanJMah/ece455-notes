@@ -204,7 +204,7 @@ All processes must pass their acceptance test before advancing.
 * Resource consumption
 * Messages external to conversation
 
-## Consensus Algorithms
+# Consensus Algorithms
 
 Don't confuse with consensus *recovery blocks*.
 
@@ -230,11 +230,11 @@ Properties of consensus:
 4. **Integrity**
    * If all the correct agents suggest the same value, each correct agent must decide on that value (often rolled into agreement)
 
-### Paxos Consensus Algorithm
+## Paxos Consensus
 
 https://youtu.be/s8JqcZtvnsM?si=U7NvPO430mHAqMpY
 
-Voting based algorithm
+Voting based consensus algorithm
 
 * Majority rules
   * Consensus means that a majority of agents agree
