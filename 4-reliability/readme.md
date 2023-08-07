@@ -30,6 +30,10 @@ Fault --> Error --> Failure
   * Types of temporary faults
   * **Transient** - originates from physical environment
   * **Intermittent** - originates internally
+ 
+* **Latent** Fault vs **Active** Fault
+  * Latent faults are not yet detected
+  * They're "latent", waiting to strike, lmao
 
 ### Errors
 
