@@ -4,12 +4,14 @@
 
 * **Failure**
   * When the delivered service no longer complies with the specification
+  * "Fail" to deliver service within specification
 
 * **Error**
   * System state that leads to a subsequent failure
 
 * **Fault**
   * The cause of an error
+  * "Who's FAULT is the error?" - the fault, lol
 
 ```
 Fault --> Error --> Failure
