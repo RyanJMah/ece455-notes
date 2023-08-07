@@ -206,6 +206,8 @@ All processes must pass their acceptance test before advancing.
 
 * Since everyone must wait for all acceptance tests, now everyone misses their deadline
 
+This is **backwards recovery**.
+
 **Information Smuggling** is the process of information leaking from aborted conversations (I don't understand this point tbh).
 
 * Resource consumption
